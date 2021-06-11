@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.urls import reverse
 # Create your models here.
 
 class Teacher(models.Model):
@@ -38,13 +39,20 @@ class Seat(models.Model):
     room = models.ForeignKey('Room', on_delete=models.CASCADE)
 
 
+
 class Room(models.Model):
     grade = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(12)]) #학년
     num = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(63)]) #반
     line = models.IntegerField(validators=[MinValueValidator(1),])
 
+    class Meta:
+        ordering = ('-grade','-num')
+        pass
     def __str__(self):
         return f"{self.grade}학년 {self.num}반"
+
+    def get_absolute_url(self):
+        return reverse('room_detail', args=[self.pk,])
 
 class SeatLog(models.Model):
     date = models.DateTimeField(auto_now_add=True) #언제

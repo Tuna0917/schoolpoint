@@ -1,0 +1,11 @@
+<form action="{% url 'c_room' %}" method="POST">{% csrf_token %}
+    <label for="grade">학년 :</label>
+    <input type="number" id="grade" name="grade" min="1" max="12" value="1"><br>
+    <label for="num">반 :</label>
+    <input type="number" id="num" name="num" min="1" max="12" value="1"><br>
+    <label for="line">책상 줄 :</label>
+    <input type="number" id="line" name="line" min="1" value="1"><br>
+    <label for="seats">책상 수 :</label>
+    <input type="number" id="seats" name="seats" min="1" value="1"><br>
+    <input type="submit">
+</form>

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for room in object_list %}
+<a href="{{ room.get_absolute_url }}">{{ room }}</a><br>
+{% endfor %}
+
+{% endblock %}

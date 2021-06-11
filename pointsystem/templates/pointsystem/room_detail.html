@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block room %}
+{{object}}
+{% endblock %}
+
+{% block content %}
+
+{% for seat in seats %}
+
+    {{ seat }}
+
+{% endfor %}
+
+{% endblock %}

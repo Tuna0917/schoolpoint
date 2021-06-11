@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.urls import reverse
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Teacher(models.Model):
@@ -18,6 +19,7 @@ class Student(models.Model):
         ('d', '자퇴'), #Dropout
         ('k', '퇴학') #Kicked
     )
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=32) #이름
     num = models.IntegerField(validators=[MinValueValidator(1),]) #번호
     point = models.IntegerField(default=0,validators=[MinValueValidator(0),])
@@ -29,10 +31,10 @@ class Student(models.Model):
         default='a'
     )
 
-
     def __str__(self):
         return self.name
 
+    
 
 class Seat(models.Model):
     student = models.OneToOneField(Student, on_delete=models.SET_NULL, null=True)
@@ -46,7 +48,7 @@ class Room(models.Model):
     line = models.IntegerField(validators=[MinValueValidator(1),])
 
     class Meta:
-        ordering = ('-grade','-num')
+        ordering = ('grade','num')
         pass
     def __str__(self):
         return f"{self.grade}학년 {self.num}반"

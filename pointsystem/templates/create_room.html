@@ -1,3 +1,11 @@
+{% extends 'base.html' %}
+
+{% block room %}
+CREATE ROOM
+{% endblock %}
+
+{% block content %}
+
 <form action="{% url 'c_room' %}" method="POST">{% csrf_token %}
     <label for="grade">학년 :</label>
     <input type="number" id="grade" name="grade" min="1" max="12" value="1"><br>
@@ -9,3 +17,5 @@
     <input type="number" id="seats" name="seats" min="1" value="1"><br>
     <input type="submit">
 </form>
+
+{% endblock %}
